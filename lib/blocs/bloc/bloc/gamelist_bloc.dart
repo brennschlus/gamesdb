@@ -11,7 +11,6 @@ class GamelistBloc extends Bloc<GamelistEvent, GamelistState> {
 
   GamelistBloc(this.apiRepository) : super(GamelistInitial()) {
     on<GetGamelist>((event, emit) async {
-      emit(const GamelistLoading());
       try {
         emit(const GamelistLoading());
 

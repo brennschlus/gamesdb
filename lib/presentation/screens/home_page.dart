@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gamesdb/blocs/bloc/bloc/gamelist_bloc.dart';
+import 'package:gamesdb/data/api_provider.dart';
 import 'package:gamesdb/models/game.dart';
 import 'package:gamesdb/models/game_list.dart';
 import 'package:gamesdb/presentation/widgets/game_card.dart';
+import 'package:gamesdb/presentation/widgets/search_pages.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class HomePage extends StatelessWidget {
             TextButton(
                 onPressed: () {
                   gamelistBloc.add(GetGamelist());
+                  print(number);
                 },
                 child: const Text('Fetch games')),
             BlocBuilder<GamelistBloc, GamelistState>(
@@ -35,8 +38,16 @@ class HomePage extends StatelessWidget {
                             metaCritic:
                                 state.gameList.results?[index].metaCritic));
                   });
-                  return buildCard(context, listGames);
+                  return Expanded(
+                    child: Column(
+                      children: [
+                        buildCard(context, listGames),
+                        const SearchPages()
+                      ],
+                    ),
+                  );
                   //   return _buildCard(context, state.gameList);
+
                 } else if (state is GamelistError) {
                   return Container();
                 }
