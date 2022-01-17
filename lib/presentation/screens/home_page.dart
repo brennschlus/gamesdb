@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gamesdb/blocs/bloc/bloc/gamelist_bloc.dart';
-import 'package:gamesdb/data/api_provider.dart';
 import 'package:gamesdb/models/game.dart';
 import 'package:gamesdb/models/game_list.dart';
 import 'package:gamesdb/presentation/widgets/game_card.dart';
@@ -13,6 +12,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GamelistBloc gamelistBloc = BlocProvider.of<GamelistBloc>(context);
+    gamelistBloc.add(GetGamelist()); // fetching api data on initialisation
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -20,7 +20,6 @@ class HomePage extends StatelessWidget {
             TextButton(
                 onPressed: () {
                   gamelistBloc.add(GetGamelist());
-                  print(number);
                 },
                 child: const Text('Fetch games')),
             BlocBuilder<GamelistBloc, GamelistState>(
@@ -46,8 +45,6 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                   );
-                  //   return _buildCard(context, state.gameList);
-
                 } else if (state is GamelistError) {
                   return Container();
                 }

@@ -20,6 +20,7 @@ class GameCard extends StatelessWidget {
             errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
           //TODO make all images the same size
+          //
           // Image.network(game.image as String),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text(

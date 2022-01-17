@@ -1,36 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gamesdb/blocs/bloc/bloc/gamelist_bloc.dart';
 import 'package:gamesdb/data/api_provider.dart';
 
 class SearchPages extends StatelessWidget {
-  const SearchPages({Key? key}) : super(key: key);
+  const SearchPages({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: const [
-        NumberButton(
-          number: '1',
-        ),
-        NumberButton(
-          number: '2',
-        ),
-        NumberButton(
-          number: '3',
-        ),
-        NumberButton(
-          number: '4',
-        ),
-        NumberButton(
-          number: '5',
-        ),
-      ],
+      children: List<NumberButton>.generate(5, (index) {
+        return NumberButton(
+          number: index + 1,
+        );
+      }),
     );
   }
 }
 
 class NumberButton extends StatefulWidget {
-  final String number;
+  final int number;
 
   const NumberButton({
     Key? key,
@@ -46,14 +38,15 @@ class _NumberButtonState extends State<NumberButton> {
 
   @override
   Widget build(BuildContext context) {
+    final GamelistBloc gamelistBloc = BlocProvider.of<GamelistBloc>(context);
     return InkWell(
       onTap: () => setState(() {
-        isTapped = !isTapped;
-        number = int.parse(widget.number);
+        number = widget.number;
+        gamelistBloc.add(GetGamelist());
       }),
       child: Container(
-        color: isTapped ? Colors.blue : Colors.grey,
-        child: Text(widget.number),
+        color: number == widget.number ? Colors.blue : Colors.grey,
+        child: Text(widget.number.toString()),
         padding: const EdgeInsets.all(5),
       ),
     );

@@ -17,7 +17,6 @@ class GamelistBloc extends Bloc<GamelistEvent, GamelistState> {
         final gameList = await apiRepository.fetchGameList();
         emit(GamelistLoaded(gameList));
 
-        //    print(gameList.results?[0].id);
         if (gameList.error != null) {
           emit(GamelistError(gameList.error as String));
         }
