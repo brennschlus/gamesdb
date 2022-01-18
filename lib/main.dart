@@ -18,6 +18,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
+          iconTheme: const IconThemeData(color: Colors.white),
+          textTheme: Typography.whiteHelsinki,
           primarySwatch: Colors.blue,
         ),
         home: BlocProvider<GamelistBloc>(

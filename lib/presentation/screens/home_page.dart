@@ -15,6 +15,7 @@ class HomePage extends StatelessWidget {
     gamelistBloc.add(GetGamelist()); // fetching api data on initialisation
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.grey[850],
         body: Column(
           children: [
             TextButton(

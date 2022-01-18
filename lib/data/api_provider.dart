@@ -9,11 +9,11 @@ int number = 1;
 
 class ApiProvider {
   final Dio _dio = Dio();
-  String _url = 'https://api.rawg.io/api/games?key=$apiKey';
 
   Future<GameList> fetchGameList() async {
     try {
-      _url = _url + '&page=$number';
+      String _url = 'https://api.rawg.io/api/games?key=$apiKey&page=$number';
+
       Response response = await _dio.get(_url);
 
       return GameList.fromJson(response.data);
