@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gamesdb/blocs/bloc/bloc/gamelist_bloc.dart';
+import 'package:gamesdb/blocs/gamelist_bloc/gamelist_bloc.dart';
 import 'package:gamesdb/data/api_provider.dart';
 
 class SearchPages extends StatelessWidget {

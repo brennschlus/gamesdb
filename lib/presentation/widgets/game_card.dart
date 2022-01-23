@@ -20,9 +20,16 @@ class GameCard extends StatelessWidget {
           children: [
             CachedNetworkImage(
               imageUrl: game.image as String,
-              progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  CircularProgressIndicator(value: downloadProgress.progress),
+              // progressIndicatorBuilder: (context, url, downloadProgress) =>
+              //     CircularProgressIndicator(value: downloadProgress.progress),
               errorWidget: (context, url, error) => const Icon(Icons.error),
+              placeholder: (context, url) {
+                return Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.grey),
+                );
+              },
             ),
             //TODO make all images the same size
             //

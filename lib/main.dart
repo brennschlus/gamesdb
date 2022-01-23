@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gamesdb/blocs/bloc/bloc/gamelist_bloc.dart';
+import 'package:gamesdb/blocs/gamelist_bloc/gamelist_bloc.dart';
+import 'package:gamesdb/cubit/bottom_bar_cubit.dart';
 import 'package:gamesdb/presentation/screens/home_page.dart';
+import 'package:gamesdb/presentation/screens/main_page.dart';
+import 'package:gamesdb/presentation/screens/search_page.dart';
 import 'package:gamesdb/repositories/api_repository.dart';
 
 void main() {
@@ -22,9 +25,14 @@ class MyApp extends StatelessWidget {
           textTheme: Typography.whiteHelsinki,
           primarySwatch: Colors.blue,
         ),
-        home: BlocProvider<GamelistBloc>(
-          create: (context) => GamelistBloc(apiRepository),
-          child: const HomePage(),
+        home: MultiBlocProvider(
+          providers: [
+            BlocProvider<GamelistBloc>(
+              create: (context) => GamelistBloc(apiRepository),
+            ),
+            BlocProvider(create: (context) => BottomBarCubit())
+          ],
+          child: const MainPage(),
         ));
   }
 }
